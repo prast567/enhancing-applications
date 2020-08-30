@@ -26,12 +26,8 @@ from opencensus.trace.samplers import ProbabilitySampler
 
 # Logging
 #logger = # TODO: Setup logger
-logger = logging.getLogger()
-logger.setLevel(logging.DEBUG)
-handler = logging.StreamHandler()
-formatter = logging.Formatter("%(asctime)s — %(name)s — %(levelname)s — %(message)s")
-handler.setFormatter(formatter)
-logger.addHandler(handler)
+logger = logging.getLogger(__name__)
+logger.addHandler(AzureLogHandler(connection_string='InstrumentationKey=7a3a0e31-6c79-479f-8b87-32cab3acead2'))
 
 # Metrics
 #exporter = # TODO: Setup exporter
