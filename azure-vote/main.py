@@ -45,7 +45,7 @@ LOGGING = {
 }
 
 logger = logging.getLogger("az_logger")
-
+logger.warning('hiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiii')
 #logger = # TODO: Setup logger
 #logger = logging.getLogger(__name__)
 #logger.addHandler(AzureLogHandler(connection_string='InstrumentationKey=7a3a0e31-6c79-479f-8b87-32cab3acead2'))
