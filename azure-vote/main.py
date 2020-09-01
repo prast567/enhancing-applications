@@ -26,29 +26,29 @@ from opencensus.trace.samplers import ProbabilitySampler
 
 # Logging
 
-LOGGING = {
-    "handlers": {
-        "azure": {
-            "level": "DEBUG",
-        "class": "opencensus.ext.azure.log_exporter.AzureLogHandler",
-            "instrumentation_key": "7a3a0e31-6c79-479f-8b87-32cab3acead2",
-         },
-        "console": {
-            "level": "DEBUG",
-            "class": "logging.StreamHandler",
-            "stream": sys.stdout,
-         },
-      },
-    "loggers": {
-        "az_logger": {"handlers": ["azure", "console"]},
-    },
-}
+# LOGGING = {
+#     "handlers": {
+#         "azure": {
+#             "level": "DEBUG",
+#         "class": "opencensus.ext.azure.log_exporter.AzureLogHandler",
+#             "instrumentation_key": "7a3a0e31-6c79-479f-8b87-32cab3acead2",
+#          },
+#         "console": {
+#             "level": "DEBUG",
+#             "class": "logging.StreamHandler",
+#             "stream": sys.stdout,
+#          },
+#       },
+#     "loggers": {
+#         "az_logger": {"handlers": ["azure", "console"]},
+#     },
+# }
 
-logger = logging.getLogger("az_logger")
-logger.warning('hiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiii')
+# logger = logging.getLogger("az_logger")
+# logger.warning('hiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiii')
 #logger = # TODO: Setup logger
-#logger = logging.getLogger(__name__)
-#logger.addHandler(AzureLogHandler(connection_string='InstrumentationKey=7a3a0e31-6c79-479f-8b87-32cab3acead2'))
+logger = logging.getLogger(__name__)
+logger.addHandler(AzureLogHandler(connection_string='InstrumentationKey=7a3a0e31-6c79-479f-8b87-32cab3acead2'))
 
 # Metrics
 #exporter = # TODO: Setup exporter
