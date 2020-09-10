@@ -107,13 +107,12 @@ def index():
     if request.method == 'GET':
 
         # Get current values
-        vote1 = r.get(button1).decode('utf-8')
+        with tracer.span(name="Cats") as span:
+          vote1 = r.get(button1).decode('utf-8')
         # TODO: use tracer object to trace cat vote
-        tracer.span(name="Cats")
-        vote2 = r.get(button2).decode('utf-8')
+        with tracer.span(name="Cats") as span:
+          vote2 = r.get(button2).decode('utf-8')
         # TODO: use tracer object to trace dog vote
-        tracer.span(name="Dogs")
-
 
         # Return index with values
         return render_template("index.html", value1=int(vote1), value2=int(vote2), button1=button1, button2=button2, title=title)
@@ -121,8 +120,6 @@ def index():
     elif request.method == 'POST':
 
         if request.form['vote'] == 'reset':
-            tracer.span(name="Cats")
-            tracer.span(name="Dogs")
             # Empty table and return results
             r.set(button1,0)
             r.set(button2,0)
@@ -139,8 +136,6 @@ def index():
             return render_template("index.html", value1=int(vote1), value2=int(vote2), button1=button1, button2=button2, title=title)
 
         else:
-            tracer.span(name="Cats")
-            tracer.span(name="Dogs")
 
             # Insert vote result into DB
             vote = request.form['vote']
