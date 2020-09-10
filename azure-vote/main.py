@@ -47,22 +47,19 @@ from opencensus.trace.samplers import ProbabilitySampler
 
 #logger = # TODO: Setup logger
 logger = logging.getLogger(__name__)
-logger.addHandler(AzureLogHandler(connection_string='InstrumentationKey=7a3a0e31-6c79-479f-8b87-32cab3acead2;IngestionEndpoint=https://westus2-0.in.applicationinsights.azure.com/
-'))
+logger.addHandler(AzureLogHandler(connection_string='InstrumentationKey=7a3a0e31-6c79-479f-8b87-32cab3acead2'))
 
 # Metrics
 #exporter = # TODO: Setup exporter
 exporter = metrics_exporter.new_metrics_exporter(
   enable_standard_metrics=True,
-  connection_string='InstrumentationKey=7a3a0e31-6c79-479f-8b87-32cab3acead2;IngestionEndpoint=https://westus2-0.in.applicationinsights.azure.com/
-')
+  connection_string='InstrumentationKey=7a3a0e31-6c79-479f-8b87-32cab3acead2')
 
 # Tracing
 #tracer = # TODO: Setup tracer
 tracer = Tracer(
     exporter=AzureExporter(
-        connection_string='InstrumentationKey=7a3a0e31-6c79-479f-8b87-32cab3acead2;IngestionEndpoint=https://westus2-0.in.applicationinsights.azure.com/
-'),
+        connection_string='InstrumentationKey=7a3a0e31-6c79-479f-8b87-32cab3acead2'),
     sampler=ProbabilitySampler(1.0),
 )
 
@@ -72,8 +69,7 @@ app = Flask(__name__)
 #middleware = # TODO: Setup flask middleware
 middleware = FlaskMiddleware(
     app,
-    exporter=AzureExporter(connection_string="InstrumentationKey=7a3a0e31-6c79-479f-8b87-32cab3acead2;IngestionEndpoint=https://westus2-0.in.applicationinsights.azure.com/
-"),
+    exporter=AzureExporter(connection_string="InstrumentationKey=7a3a0e31-6c79-479f-8b87-32cab3acead2"),
     sampler=ProbabilitySampler(rate=1.0),
 )
 # Load configurations from environment or config file
@@ -109,9 +105,6 @@ if not r.get(button2): r.set(button2,0)
 def index():
 
     if request.method == 'GET':
-        tracer.span(name="Dogs_vote")
-        tracer.span(name="Cats_vote")
-
 
         # Get current values
         vote1 = r.get(button1).decode('utf-8')
@@ -126,8 +119,6 @@ def index():
         return render_template("index.html", value1=int(vote1), value2=int(vote2), button1=button1, button2=button2, title=title)
 
     elif request.method == 'POST':
-        tracer.span(name="Dogs_vote")
-        tracer.span(name="Cats_vote")
 
         if request.form['vote'] == 'reset':
             # Empty table and return results
