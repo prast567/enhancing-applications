@@ -105,6 +105,9 @@ if not r.get(button2): r.set(button2,0)
 def index():
 
     if request.method == 'GET':
+        tracer.span(name="Dogs_vote")
+        tracer.span(name="Cats_vote")
+
 
         # Get current values
         vote1 = r.get(button1).decode('utf-8')
@@ -119,6 +122,8 @@ def index():
         return render_template("index.html", value1=int(vote1), value2=int(vote2), button1=button1, button2=button2, title=title)
 
     elif request.method == 'POST':
+        tracer.span(name="Dogs_vote")
+        tracer.span(name="Cats_vote")
 
         if request.form['vote'] == 'reset':
             # Empty table and return results
