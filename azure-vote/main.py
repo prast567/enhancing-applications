@@ -55,7 +55,6 @@ exporter = metrics_exporter.new_metrics_exporter(
   enable_standard_metrics=True,
   connection_string='InstrumentationKey=7a3a0e31-6c79-479f-8b87-32cab3acead2')
 
-
 # Tracing
 #tracer = # TODO: Setup tracer
 tracer = Tracer(
